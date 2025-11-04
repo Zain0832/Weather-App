@@ -1,0 +1,146 @@
+.app {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  color: #fff;
+  background: linear-gradient(135deg, #00aaff, #004e92);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-box input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  width: 250px;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  border: none;
+  background: #fff;
+  color: #004e92;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  background: #ddd;
+}
+
+.weather-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 30px;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.weather-info img {
+  width: 100px;
+}
+
+.details {
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #ffcccc;
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+/* 🌤️ Backgrounds by weather type */
+.app.sunny {
+  background: linear-gradient(135deg, #f9d423, #ff4e50);
+}
+
+.app.cloudy {
+  background: linear-gradient(135deg, #83a4d4, #b6fbff);
+}
+
+.app.rainy {
+  background: linear-gradient(135deg, #3a7bd5, #3a6073);
+}
+
+.app.snowy {
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+}
+
+.app.default {
+  background: linear-gradient(135deg, #00aaff, #004e92);
+}
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 12px;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .search-box input {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .search-box button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .weather-info {
+    width: 90%;
+    margin-top: 25px;
+    padding: 15px;
+  }
+
+  .weather-info h1 {
+    font-size: 2rem;
+  }
+
+  .weather-info h2 {
+    font-size: 1.2rem;
+  }
+
+  .details {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .weather-info img {
+    width: 80px;
+  }
+
+  .search-box {
+    padding: 12px;
+    gap: 10px;
+  }
+}
