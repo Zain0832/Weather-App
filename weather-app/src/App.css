@@ -1,146 +1,263 @@
+/* App.css */
+
 .app {
-  font-family: 'Poppins', sans-serif;
   text-align: center;
-  margin-top: 50px;
-  color: #fff;
-  background: linear-gradient(135deg, #00aaff, #004e92);
   min-height: 100vh;
-  padding: 20px;
+  padding: 40px 20px;
+  transition: background 0.6s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.title {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+/* 🌈 Weather backgrounds */
+.app.default {
+  background: linear-gradient(to bottom, #89f7fe, #66a6ff);
+}
+.app.sunny {
+  background: linear-gradient(to bottom, #f6d365, #fda085);
+}
+.app.cloudy {
+  background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
+}
+.app.rainy {
+  background: linear-gradient(to bottom, #4b79a1, #283e51);
+}
+.app.snowy {
+  background: linear-gradient(to bottom, #83a4d4, #b6fbff);
 }
 
+/* ☁️ Moving Clouds */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: moveClouds 60s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud1 {
+  width: 120px;
+  height: 70px;
+  top: 50px;
+  left: -150px;
+  animation-delay: 0s;
+}
+.cloud1::before {
+  width: 70px;
+  height: 70px;
+  top: -20px;
+  left: 40px;
+}
+.cloud1::after {
+  width: 90px;
+  height: 90px;
+  top: -10px;
+  left: 80px;
+}
+
+.cloud2 {
+  width: 150px;
+  height: 80px;
+  top: 200px;
+  left: -200px;
+  animation-delay: 10s;
+}
+.cloud2::before {
+  width: 80px;
+  height: 80px;
+  top: -15px;
+  left: 50px;
+}
+.cloud2::after {
+  width: 100px;
+  height: 100px;
+  top: -5px;
+  left: 90px;
+}
+
+.cloud3 {
+  width: 100px;
+  height: 60px;
+  top: 350px;
+  left: -150px;
+  animation-delay: 20s;
+}
+.cloud3::before {
+  width: 60px;
+  height: 60px;
+  top: -10px;
+  left: 30px;
+}
+.cloud3::after {
+  width: 80px;
+  height: 80px;
+  top: -5px;
+  left: 60px;
+}
+
+@keyframes moveClouds {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(120vw);
+  }
+}
+
+/* 🌞 Sun Animation */
+.sun {
+  position: absolute;
+  top: 80px;
+  right: 80px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #ffeb3b 40%, #ff9800 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 40px 10px rgba(255, 215, 0, 0.6);
+  animation: spinSun 20s linear infinite;
+  display: none;
+}
+.app.sunny .sun {
+  display: block;
+}
+
+@keyframes spinSun {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 🌧️ Real Falling Rain Animation */
+.rain {
+  display: none;
+}
+.app.rainy .rain {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.app.rainy .rain span {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  animation: drop 0.5s linear infinite;
+  border-radius: 2px;
+}
+.app.rainy .rain span:nth-child(odd) {
+  height: 30px;
+  animation-duration: 0.6s;
+  opacity: 0.6;
+}
+.app.rainy .rain span:nth-child(even) {
+  animation-duration: 0.8s;
+  opacity: 0.4;
+}
+@keyframes drop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* ❄️ Falling Snow */
+.snow {
+  display: none;
+}
+.app.snowy .snow {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.app.snowy .snow::before,
+.app.snowy .snow::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(white 2px, transparent 2px);
+  background-size: 20px 20px;
+  animation: snowFall 10s linear infinite;
+  opacity: 0.7;
+}
+.app.snowy .snow::after {
+  animation-delay: 5s;
+  opacity: 0.4;
+}
+@keyframes snowFall {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 10px 100vh;
+  }
+}
+
+/* 🔍 Search Box */
 .search-box {
+  margin: 20px auto;
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 10px;
 }
-
 .search-box input {
-  padding: 10px 15px;
-  font-size: 1rem;
+  padding: 10px;
+  border-radius: 6px;
   border: none;
-  border-radius: 8px;
-  width: 250px;
+  width: 200px;
+  font-size: 1rem;
 }
-
 .search-box button {
   padding: 10px 15px;
   border: none;
-  background: #fff;
-  color: #004e92;
-  font-weight: bold;
-  border-radius: 8px;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
-
 .search-box button:hover {
-  background: #ddd;
+  background: #555;
 }
 
+/* 🌡️ Weather Info */
 .weather-info {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 16px;
   margin-top: 30px;
-  display: inline-block;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
-
-.weather-info img {
-  width: 100px;
-}
-
 .details {
   margin-top: 15px;
-  font-size: 1.1rem;
 }
-
 .error {
-  color: #ffcccc;
-  font-size: 1.2rem;
-  margin-top: 15px;
-}
-
-/* 🌤️ Backgrounds by weather type */
-.app.sunny {
-  background: linear-gradient(135deg, #f9d423, #ff4e50);
-}
-
-.app.cloudy {
-  background: linear-gradient(135deg, #83a4d4, #b6fbff);
-}
-
-.app.rainy {
-  background: linear-gradient(135deg, #3a7bd5, #3a6073);
-}
-
-.app.snowy {
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
-}
-
-.app.default {
-  background: linear-gradient(135deg, #00aaff, #004e92);
-}
-/* 📱 Responsive Design */
-@media (max-width: 768px) {
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .search-box {
-    flex-direction: column;
-    gap: 12px;
-    width: 90%;
-    padding: 15px;
-  }
-
-  .search-box input {
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  .search-box button {
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  .weather-info {
-    width: 90%;
-    margin-top: 25px;
-    padding: 15px;
-  }
-
-  .weather-info h1 {
-    font-size: 2rem;
-  }
-
-  .weather-info h2 {
-    font-size: 1.2rem;
-  }
-
-  .details {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 1.6rem;
-  }
-
-  .weather-info img {
-    width: 80px;
-  }
-
-  .search-box {
-    padding: 12px;
-    gap: 10px;
-  }
+  color: #ff7070;
+  margin-top: 20px;
+  font-weight: bold;
 }
